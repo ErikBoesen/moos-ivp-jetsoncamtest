@@ -1,3 +1,10 @@
+.svn/
+MOOSLog*
 bin/
 build/
-LOG_*
+lib/
+.LastOpenedMOOSLogDirectory
+LOG_*/
+cmake-build-debug/
+targ_*
+*.moos++
