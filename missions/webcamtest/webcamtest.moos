@@ -1,0 +1,37 @@
+ProcessConfig = ANTLER
+{
+  MSBetweenLaunches = 200
+
+  Run = MOOSDB     @ NewConsole = false
+  Run = iWebCam    @ NewConsole = false
+  Run = pCamViewer @ NewConsole = false
+  Run = pLogger    @ NewConsole = false
+}
+ProcessConfig = iWebCam
+{
+   AppTick   = 30
+   CommsTick = 4
+
+   ImageWidth = 19200
+   ImageHeight = 10800
+}
+
+ProcessConfig = pCamViewer
+{
+   AppTick = 30
+}
+
+ProcessConfig = pLogger
+{
+  AppTick = 5
+  CommsTick = 5
+  File = LOG_TEST
+  PATH = ./
+  SyncLog = true @ 0.2
+  AsyncLog = true
+  FileTimeStamp = true
+
+  WildCardLogging = true
+  WildCardOmitPattern = *_STATUS
+  LogAuxSrc = true
+}
