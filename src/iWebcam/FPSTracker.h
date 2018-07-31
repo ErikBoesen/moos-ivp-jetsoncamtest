@@ -7,7 +7,7 @@ class FPSTracker
 {
 	public:
 		FPSTracker();
-		void registerFrame();
+		void count();
 		double getFPS();
     private:
         void timekeep();
