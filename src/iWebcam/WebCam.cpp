@@ -46,7 +46,7 @@ bool WebCam::OnNewMail(MOOSMSG_LIST &NewMail)
 #if 0 // Keep these around just for template
     string comm  = msg.GetCommunity();
     double dval  = msg.GetDouble();
-    string sval  = msg.GetString(); 
+    string sval  = msg.GetString();
     string msrc  = msg.GetSource();
     double mtime = msg.GetTime();
     bool   mdbl  = msg.IsDouble();
@@ -65,7 +65,6 @@ bool WebCam::OnNewMail(MOOSMSG_LIST &NewMail)
 bool WebCam::OnConnectToServer()
 {
    registerVariables();
-   fpsTracker.start();
    return(true);
 }
 
@@ -77,14 +76,14 @@ bool WebCam::Iterate()
 {
   AppCastingMOOSApp::Iterate();
 
-  Notify("FPS", fpsTracker.getFps());
+  Notify("FPS", fpsTracker.getFPS());
 
-  // Send data binary data to MOOSDB
+  // Send binary data to MOOSDB
   if(vc.isOpened())
     {
       vc >> capture_frame;
-      fpsTracker.registerFrame();
-      Notify("IMAGE", (void*)capture_frame.data, capture_frame.step[0] * capture_frame.rows, MOOSLocalTime()); 
+      fpsTracker.count();
+      Notify("IMAGE", (void*)capture_frame.data, capture_frame.step[0] * capture_frame.rows, MOOSLocalTime());
       Notify("IMAGE_HEIGHT", capture_frame.rows);
       Notify("IMAGE_WIDTH", capture_frame.cols);
       Notify("IMAGE_TYPE", capture_frame.type());
@@ -142,8 +141,8 @@ bool WebCam::OnStartUp()
   // set resolution to defaults or params, if included in plug file
   vc.set(CV_CAP_PROP_FRAME_WIDTH, imageWidth);
   vc.set(CV_CAP_PROP_FRAME_HEIGHT, imageHeight);
-  
-  registerVariables();	
+
+  registerVariables();
   return(true);
 }
 
@@ -159,7 +158,7 @@ void WebCam::registerVariables()
 //------------------------------------------------------------
 // Procedure: buildReport()
 
-bool WebCam::buildReport() 
+bool WebCam::buildReport()
 {
   m_msgs << "Requested resolution:  " << imageWidth << "x" << imageHeight << "\n";
   m_msgs << "Last image resolution: " << capture_frame.cols << "x" << capture_frame.rows << "\n";

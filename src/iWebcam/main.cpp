@@ -22,7 +22,7 @@ int main(int argc, char *argv[])
 
   //Mat frame;
   time_t date_time = time(NULL);
-  string date_time_string = asctime(localtime(&date_time)); 
+  string date_time_string = asctime(localtime(&date_time));
   string log_dir = "/home/nvidia/moos-ivp-jetsoncamtest/bin/test.avi";// + date_time_string + ".mpg";
   WebCam WebCam;
 
@@ -43,7 +43,7 @@ int main(int argc, char *argv[])
     else if(i==2)
       run_command = argi;
   }
-  
+
   if(mission_file == "")
     showHelpAndExit();
 
@@ -57,36 +57,36 @@ int main(int argc, char *argv[])
   //cout << termColor() << endl;
 
 /*
-  //create a window called "MyVideo"         
-    namedWindow("MyVideo", CV_WINDOW_AUTOSIZE); 
-  
-  //get the width and height of frames of the video  
-  double dWidth = WebCam.vc.get(CV_CAP_PROP_FRAME_WIDTH); 
-  double dHeight = WebCam.vc.get(CV_CAP_PROP_FRAME_HEIGHT); 
+  //create a window called "MyVideo"
+    namedWindow("MyVideo", CV_WINDOW_AUTOSIZE);
+
+  //get the width and height of frames of the video
+  double dWidth = WebCam.vc.get(CV_CAP_PROP_FRAME_WIDTH);
+  double dHeight = WebCam.vc.get(CV_CAP_PROP_FRAME_HEIGHT);
 
   //  cout << "Frame size:" << dWidth << "x"<< dHeight << endl;
 
   Size frameSize(static_cast<int>(dWidth), static_cast<int>(dHeight));
-  
-  // initialize VideoWriter object                                   
+
+  // initialize VideoWriter object
   VideoWriter oVideoWriter(log_dir,CV_FOURCC('M','J','P','G'),10,frameSize,true);
 
-  if(!oVideoWriter.isOpened()) //If not exit the program    
+  if(!oVideoWriter.isOpened()) //If not exit the program
   {
     cout << "Error: Failed to write video" << endl;
     return -1;
   }
-  
+
   while(1)
     {
       WebCam.vc >> WebCam.capture_frame;
       if (WebCam.capture_frame.empty()) { cout << "Empty frame" << endl; break; }
 
-      oVideoWriter.write(WebCam.capture_frame); //write the frame into the file 
+      oVideoWriter.write(WebCam.capture_frame); //write the frame into the file
 
-        imshow("MyVideo", WebCam.capture_frame); // show the frame in "MyVideo" window  
+        imshow("MyVideo", WebCam.capture_frame); // show the frame in "MyVideo" window
 
-      if (waitKey(30)==27) // wait for 'esc' key press for 30ms. if 'esc' key is pressed break loop                                        
+      if (waitKey(30)==27) // wait for 'esc' key press for 30ms. if 'esc' key is pressed break loop
 	{
 	  cout << "esc key is pressed by user" << endl;
 	  break;

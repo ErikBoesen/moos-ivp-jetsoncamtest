@@ -3,24 +3,32 @@
 
 FPSTracker::FPSTracker()
 {
-  framesProcessed = 0;
+  m_frames = 0;
+  m_fps = 0;
+  time(&m_time);
 }
 
-void FPSTracker::start()
-{
-  time(&startTime);
+void FPSTracker::timekeep() {
+    time_t newTime;
+    time(&newTime);
+    // This implementation will return the number of frames processed in the previous second.
+    // Ideally, it would return the number of frames processed in the immediate second preceding
+    // the call. Implementing this may create greater overhead.
+    // TODO: Find an efficient way to count FPS in the last second.
+    if (newTime != m_time) {
+        m_time = newTime;
+        m_fps = m_frames;
+        m_frames = 0;
+    }
 }
 
-void FPSTracker::registerFrame()
+void FPSTracker::count()
 {
-  framesProcessed += 1;
+    timekeep();
+    m_frames++;
 }
 
-double FPSTracker::getFps()
+double FPSTracker::getFPS()
 {
-  time_t currentTime;
-  time(&currentTime);
-  double elapsedSeconds = difftime(currentTime, startTime);
-  double fps = framesProcessed / elapsedSeconds;
-  return fps;
+  return m_fps;
 }

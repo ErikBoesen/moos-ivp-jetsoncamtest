@@ -7,12 +7,14 @@ class FPSTracker
 {
 	public:
 		FPSTracker();
-		void start();
 		void registerFrame();
-		double getFps();
+		double getFPS();
+    private:
+        void timekeep();
 	private:
-		unsigned int framesProcessed;
-		time_t startTime;
+		unsigned int m_frames;
+        unsigned int m_fps;
+		time_t m_time;
 };
 
 #endif
