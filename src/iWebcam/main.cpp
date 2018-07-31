@@ -23,7 +23,7 @@ int main(int argc, char *argv[])
   //Mat frame;
   time_t date_time = time(NULL);
   string date_time_string = asctime(localtime(&date_time));
-  string log_dir = "/home/nvidia/moos-ivp-jetsoncamtest/bin/test.avi";// + date_time_string + ".mpg";
+  //string log_dir = "/home/nvidia/moos-ivp-jetsoncamtest/bin/test.avi";// + date_time_string + ".mpg";
   WebCam WebCam;
 
   for(int i=1; i<argc; i++) {

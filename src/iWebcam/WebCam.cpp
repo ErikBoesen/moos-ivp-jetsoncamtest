@@ -118,11 +118,10 @@ bool WebCam::OnStartUp()
   // not, give a warning.
   STRING_LIST::iterator p;
   for(p=sParams.begin(); p!=sParams.end(); p++) {
-    string orig  = *p;
-    string line  = *p;
-    string param = toupper(biteStringX(line, '='));
-    string value = line;
-
+    string orig = *p;
+    string param = stripBlankEnds(biteString(*p, '='));
+    string value = stripBlankEnds(*p);
+	
     bool handled = false;
 
     if(param == "ImageWidth") {
